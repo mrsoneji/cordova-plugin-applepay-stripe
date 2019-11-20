@@ -16,7 +16,7 @@
 
     // Set the capabilities that your merchant supports
     // Adyen for example, only supports the 3DS one.
-    merchantCapabilities = PKMerchantCapability3DS;// PKMerchantCapabilityEMV;
+    merchantCapabilities = @[PKMerchantCapabilityCredit, PKMerchantCapabilityDebit, PKMerchantCapability3DS];
 
     // Stripe Publishable Key
 #ifndef NDEBUG
@@ -188,7 +188,7 @@
 {
     if ([PKPaymentAuthorizationViewController canMakePayments]) {
         if ((floor(NSFoundationVersionNumber) < NSFoundationVersionNumber_iOS_8_0)) {
-            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"This device cannot make payments."];
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"This device cannot make payments because is old."];
             [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             return;
         } else if ([[NSProcessInfo processInfo] isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){9, 0, 0}]) {
@@ -212,12 +212,12 @@
                 return;
             }
         } else {
-            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"This device cannot make payments."];
+            CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"This device cannot make payments and lets find out why."];
             [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             return;
         }
     } else {
-        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"This device cannot make payments."];
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString: @"This device cannot make payments because of reasons."];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         return;
     }
