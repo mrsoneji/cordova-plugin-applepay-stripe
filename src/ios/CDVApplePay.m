@@ -16,7 +16,7 @@
 
     // Set the capabilities that your merchant supports
     // Adyen for example, only supports the 3DS one.
-    merchantCapabilities = @[PKMerchantCapabilityCredit, PKMerchantCapabilityDebit, PKMerchantCapability3DS];
+    merchantCapabilities = @[PKMerchantCapabilityCredit];
 
     // Stripe Publishable Key
 #ifndef NDEBUG
